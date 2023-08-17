@@ -10,18 +10,17 @@ function verificarFechas() {
     
     var rowText = data[i][0];
     var rowDate = data[i][1];
-    var roleId = "822582068549910529"; // Este es el ID que tiene el rol al cual se quiere arrobar en el mensaje por discord
+    var roleId = "822582068549910529"; // Aca se debe reemplazar por el role ID que tiene el rol al cual se quiere mencionar en los mensajes
 
-   
 
     if (rowDate instanceof Date) {
       if (sonTresDiasAntes(rowDate, currentDate)) {
         var fechaFormateada = rowDate.toLocaleDateString("es-ES", { day: "numeric", month: "long" });
-        var mensaje = "Buenas! ¿Como estan?" + roleId + " Recuerden que faltan tres días para que se termine " + rowText + " (" + fechaFormateada + ")";
+        var mensaje = "Buenas! ¿Como estan? " + "<@&" + roleId + "> " + " Recuerden que faltan tres días para que se termine " + rowText + " (" + fechaFormateada + ")";
         enviarMensajeDiscord(mensaje);
       } else if (esElMismoDia(rowDate, currentDate)) {
         var fechaFormateada = rowDate.toLocaleDateString("es-ES", { day: "numeric", month: "long" });
-        var mensaje = "Buenas! ¿Como estan? " + roleId + " Recuerden que hoy se termina " + rowText + " (" + fechaFormateada + ")";
+        var mensaje = "Buenas! ¿Como estan? " + "<@&" + roleId + "> " + " Recuerden que hoy se termina " + rowText + " (" + fechaFormateada + ")";
         enviarMensajeDiscord(mensaje);
       } 
     }
@@ -41,7 +40,7 @@ function esElMismoDia(date1, date2) {
 }
 
 function enviarMensajeDiscord(mensaje) {
-  var webhookUrl = "https://discord.com/api/webhooks/1126330525443952740/RsWthgEDr3oefLMfmfWcoQMjBQTwCSvf15Wu24pFClSGOgRhm1gNZKWaire2FL7G5PBJ"; // Reemplaza "URL_DEL_WEBHOOK" con la URL del webhook del canal de Discord donde se quiere mandar el mensaje
+  var webhookUrl = "https://discord.com/api/webhooks/1126330525443952740/RsWthgEDr3oefLMfmfWcoQMjBQTwCSvf15Wu24pFClSGOgRhm1gNZKWaire2FL7G5PBJ"; // Reemplaza "URL_DEL_WEBHOOK" con la URL de tu webhook de Discord
   
   var payload = {
     content: mensaje
